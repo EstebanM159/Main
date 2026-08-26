@@ -1,4 +1,5 @@
 import express from 'express';
+import type { Request, Response } from "express";
 import dotenv from 'dotenv'
 import cors from 'cors';
 import { connectDB } from './config/db';
@@ -16,4 +17,7 @@ app.use('/api/auth',AuthRoutes)
 app.use('/api/dates',ShiftRoutes)
 app.use('/api/admin',AdminRoutes)
 app.use('/api/profile',ProfileRoutes)
+app.get('/health', (req: Request, res: Response) => {
+  res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() })
+})
 export default app
